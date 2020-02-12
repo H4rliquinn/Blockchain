@@ -147,22 +147,26 @@ print(blockchain.hash(blockchain.last_block))
 @app.route('/mine', methods=['POST'])
 def mine():
     data=json.loads(request.data)
-    print("DATA",data)
     proof=data['proof']
     id=data['id']
-    print("REQUEST",proof,id)
+    # print("REQUEST",proof,id)
     # Check Valid Proof
     block_string = json.dumps(blockchain.last_block, sort_keys=True)
     valid = blockchain.valid_proof(block_string,proof)
-    print("VALID",valid)
     # # Forge the new Block by adding it to the chain with the proof
-    previous_hash = blockchain.hash(blockchain.last_block)
-    new_block = blockchain.new_block(proof, previous_hash)
-
-    response = {
-        'message':'New Block Forged',
-        "block": new_block #new_block
-    }
+    if valid:
+        previous_hash = blockchain.hash(blockchain.last_block)
+        new_block = blockchain.new_block(proof, previous_hash)
+        response = {
+            'message':'New Block Forged',
+            "block": new_block #new_block
+        }
+    else:
+        response = {
+            'message':'Invalid Proof',
+            'block':block_string,
+            "proof": proof,
+        }        
 
     return jsonify(response), 200
 
