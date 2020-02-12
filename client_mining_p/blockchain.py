@@ -156,11 +156,12 @@ def mine():
     valid = blockchain.valid_proof(block_string,proof)
     print("VALID",valid)
     # # Forge the new Block by adding it to the chain with the proof
-    # previous_hash = blockchain.hash(blockchain.last_block)
-    # new_block = blockchain.new_block(proof, previous_hash)
+    previous_hash = blockchain.hash(blockchain.last_block)
+    new_block = blockchain.new_block(proof, previous_hash)
 
     response = {
-        "block": "And Blue" #new_block
+        'message':'New Block Forged',
+        "block": new_block #new_block
     }
 
     return jsonify(response), 200

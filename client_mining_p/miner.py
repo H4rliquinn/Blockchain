@@ -52,6 +52,7 @@ if __name__ == '__main__':
     f.close()
 
     # Run forever until interrupted
+    coins=0
     while True:
         r = requests.get(url=node + "/last_block")
         # Handle non-json response
@@ -74,8 +75,14 @@ if __name__ == '__main__':
 
         r = requests.post(url=node + "/mine", json=post_data)
         data = r.json()
-        break
+
         # TODO: If the server responds with a 'message' 'New Block Forged'
+        if data['message']=='New Block Forged':
+            coins+=1
+            print("COINS",coins)
+        else:
+            print("ERROR")
+            break
         # add 1 to the number of coins mined and print it.  Otherwise,
         # print the message from the server.
-        pass
+        
