@@ -128,22 +128,42 @@ print(blockchain.chain)
 print(blockchain.hash(blockchain.last_block))
 
 
-@app.route('/mine', methods=['GET'])
-def mine():
-    # Run the proof of work algorithm to get the next proof
-    proof = blockchain.proof_of_work(blockchain.last_block)
+# @app.route('/mine', methods=['GET'])
+# def mine():
+#     # Run the proof of work algorithm to get the next proof
+#     proof = blockchain.proof_of_work(blockchain.last_block)
 
-    # Forge the new Block by adding it to the chain with the proof
-    previous_hash = blockchain.hash(blockchain.last_block)
-    new_block = blockchain.new_block(proof, previous_hash)
+#     # Forge the new Block by adding it to the chain with the proof
+#     previous_hash = blockchain.hash(blockchain.last_block)
+#     new_block = blockchain.new_block(proof, previous_hash)
+
+#     response = {
+#         # TODO: Send a JSON response with the new block
+#         "block": new_block
+#     }
+
+#     return jsonify(response), 200
+
+@app.route('/mine', methods=['POST'])
+def mine():
+    data=json.loads(request.data)
+    print("DATA",data)
+    proof=data['proof']
+    id=data['id']
+    print("REQUEST",proof,id)
+    # Check Valid Proof
+    block_string = json.dumps(blockchain.last_block, sort_keys=True)
+    valid = blockchain.valid_proof(block_string,proof)
+    print("VALID",valid)
+    # # Forge the new Block by adding it to the chain with the proof
+    # previous_hash = blockchain.hash(blockchain.last_block)
+    # new_block = blockchain.new_block(proof, previous_hash)
 
     response = {
-        # TODO: Send a JSON response with the new block
-        "block": new_block
+        "block": "And Blue" #new_block
     }
 
     return jsonify(response), 200
-
 
 @app.route('/chain', methods=['GET'])
 def full_chain():

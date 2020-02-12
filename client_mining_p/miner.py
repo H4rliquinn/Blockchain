@@ -66,16 +66,15 @@ if __name__ == '__main__':
         # TODO: Get the block from `data` and use it to look for a new proof
         # new_proof = ???
         print("BLOCK",data['last_block'])
-        proof=proof_of_work(data['last_block'])
-        print("PROOF",proof)
+        new_proof=proof_of_work(data['last_block'])
+        print("PROOF",new_proof)
 
-        break
         # When found, POST it to the server {"proof": new_proof, "id": id}
         post_data = {"proof": new_proof, "id": id}
 
         r = requests.post(url=node + "/mine", json=post_data)
         data = r.json()
-
+        break
         # TODO: If the server responds with a 'message' 'New Block Forged'
         # add 1 to the number of coins mined and print it.  Otherwise,
         # print the message from the server.
