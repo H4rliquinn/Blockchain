@@ -9,7 +9,7 @@ from flask import Flask, jsonify, request
 class Blockchain(object):
     def __init__(self):
         self.chain = []
-        self.current_transactions = []
+        self.current_transactions = ["I'm a little teapot"]
 
         # Create the genesis block
         self.new_block(previous_hash=1, proof=100)
@@ -91,8 +91,12 @@ class Blockchain(object):
         :return: A valid proof for the provided block
         """
         # TODO
-        pass
-        # return proof
+        block_string=json.dumps(block, sort_keys=True)
+        proof=0
+        while self.valid_proof(block_string, proof) is False:
+            proof+=1
+
+        return proof
 
     @staticmethod
     def valid_proof(block_string, proof):
@@ -107,7 +111,7 @@ class Blockchain(object):
         :return: True if the resulting hash is a valid proof, False otherwise
         """
         # TODO
-        pass
+        
         # return True or False
 
 
@@ -119,7 +123,8 @@ node_identifier = str(uuid4()).replace('-', '')
 
 # Instantiate the Blockchain
 blockchain = Blockchain()
-
+print(blockchain.chain)
+print(blockchain.hash(blockchain.last_block))
 
 @app.route('/mine', methods=['GET'])
 def mine():
