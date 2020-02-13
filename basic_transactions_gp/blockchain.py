@@ -132,7 +132,7 @@ print(blockchain.hash(blockchain.last_block))
 @app.route("/")
 def helloWorld():
   return "Hello, cross-origin-world!"
-  
+
 @app.route('/transaction/new', methods=['POST'])
 def receive_new_transaction():
     #     * use `request.get_json()` to pull the data out of the POST
@@ -141,7 +141,7 @@ def receive_new_transaction():
     # * upon success, return a 'message' indicating index of the block
     #   containing the transaction
     data = request.get_json()
-
+    
     required = ['sender', 'recipient', 'amount']
     if not all(k in data for k in required):
         # TODO Better error messaging
