@@ -1,3 +1,10 @@
 .App {
   text-align: center;
 }
+
+.Sent{
+  color:red;
+}
+.Recieve{
+  color:green;
+}
