@@ -45,6 +45,22 @@ class Blockchain(object):
         # Return the new block
         return block
 
+    def new_transaction(self, sender,recipient,amount):
+        """
+        :param sender: <str> Address of the Recipient
+        :param recipient: <str> Address of the Recipient
+        :param amount: <int> Amount
+        :return: <int> The index of the `block` that will hold this transaction
+        """
+        transaction={
+            'sender':sender,
+            'recipient':recipient,
+            'amount':amount,
+        }
+
+        self.current_transactions.append(transaction)
+        return self.last_block['index']+1
+        
     def hash(self, block):
         """
         Creates a SHA-256 hash of a Block
