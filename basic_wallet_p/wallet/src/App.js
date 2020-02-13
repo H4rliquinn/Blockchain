@@ -28,7 +28,7 @@ function App() {
   
         <h2>Transactions</h2>
         <ul>
-          {chain!=null&& <li>Thing</li>&&chain.map(item => {
+          {chain!=null && user != ''&& <li>Thing</li>&&chain.map(item => {
               return item.transactions.map(trans => {
                 if (trans.sender==user){
                   bal-=trans.amount;
