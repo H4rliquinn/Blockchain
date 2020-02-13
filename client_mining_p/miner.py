@@ -77,12 +77,12 @@ if __name__ == '__main__':
         data = r.json()
 
         # TODO: If the server responds with a 'message' 'New Block Forged'
-        if data['message']=='New Block Forged':
-            coins+=1
-            print("COINS",coins)
-        else:
-            print("ERROR",data['message'])
-            break
+        # if data['message']=='New Block Forged':
+        #     coins+=1
+        #     print("COINS",coins)
+        # else:
+        #     print("ERROR",data['message'])
+        #     break
         # add 1 to the number of coins mined and print it.  Otherwise,
         # print the message from the server.
         
