@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+}
+
+.Sent{
+  color:red;
+}
+.Recieve{
+  color:green;
+}
+.transactions{
+  text-align:left;
+  margin:10px auto;
+  width:300px;
+}
